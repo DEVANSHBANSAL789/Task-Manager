@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+// 1. Import your new smart API instance
+import api from './api'; 
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      // 2. Use 'api.post' and ONLY the path. It automatically adds the base URL!
+      const response = await api.post('/auth/login', {
         email,
         password,
       });
@@ -34,7 +36,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      // 3. Update the register URL too
+      const response = await api.post('/auth/register', {
         name,
         email,
         password,
